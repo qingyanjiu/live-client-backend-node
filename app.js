@@ -26,9 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function (req, res, next) {
 
     // res.locals.title = config['title']
-    res.locals.csrf = req.session ? req.session._csrf : '';
+    // res.locals.csrf = req.session ? req.session._csrf : '';
     res.locals.req = req;
-    res.locals.session = req.session;
+    // res.locals.session = req.session;
     // res.locals.success=req.flash("success").lenghth?req.flash("success"):null;
     // res.locals.error=req.flash("error").lenghth?req.flash("error"):null;
     // res.locals.result=req.flash("result").lenghth?req.flash("result"):null;
@@ -52,7 +52,7 @@ app.use('/live', liveRoutes);
 //allow custom header and CORS
 app.all('*',function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With');
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 
     if (req.method == 'OPTIONS') {
