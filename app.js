@@ -1,31 +1,16 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var partials = require('express-partials');
-var session = require('express-session');
-// var flash = require('connect-flash');
 var fs = require('fs');
-
-// var MongoStore = require('connect-mongo')(session);
-var settings = require('./settings');
 
 var liveRoutes = require('./routes/Live');
 
 var app = express();
 
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-// app.use(partials());
-
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
 
 app.use(bodyParser.json({limit: '1mb'}));  //body-parser 解析json格式数据
 app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下面,为参数编码

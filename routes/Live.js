@@ -1,49 +1,37 @@
 'use strict';
 
-var httpReq = require('../services/HttpRequests');
-
 var express = require('express');
 var router = express.Router();
 var liveBusiness = require('../business/LiveBusiness');
 var constants = require('../services/constants');
 
 
-//开播
-router.get('/onpublish', function (req, res, next) {
-    var streamCode = req.query.name;
-    var param = {};
-    param.streamCode = streamCode;
-    liveBusiness.onpublish(param, (err, data)=> {
-        if (err) {
-            console.error("LiveRouter--post--end--error");
-            console.error(err);
-            res.json({"error": "开播失败,请稍后再试"});
-            // throw err;
-        }
-        if (data) {
-            if (data.result === "success")
-                res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-            res.end();
+router.post('/openRoom', function (req, res, next) {
+    let params = {};
+    let roomName = req.body.roomName;
+    let userName = req.body.userName;
+    let roomPass = req.body.roomPass;
+    params.roomName = roomName;
+    params.userName = userName;
+    params.roomPass = roomPass;
+    liveBusiness.openRoom(params, result=>{
+        if(result === 'error'){
+            res.json({'result':'error','message':'Create room failed'});
+        }else{
+            res.json({'result':'success'});
         }
     });
 });
 
-//停播
-router.get('/endpublish', function (req, res, next) {
-    var streamCode = req.query.name;
-    var param = {};
-    param.streamCode = streamCode;
-    liveBusiness.endpublish(param, (err, data)=> {
-        if (err) {
-            console.error("LiveRouter--post--end--error");
-            console.error(err);
-            res.json({"error": "停播失败,请稍后再试"});
-            // throw err;
-        }
-        if (data) {
-            if (data.result === "success")
-                res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
-            res.end();
+
+
+router.get('/getRoom', function (req, res, next) {
+    let userName = req.query.userName;
+    liveBusiness.getRoom(userName, result=>{
+        if(result === 'error'){
+            res.json({'result':'error','message':'Get room info failed'});
+        }else{
+            res.json({'result':result});
         }
     });
 });
