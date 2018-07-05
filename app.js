@@ -1,9 +1,7 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var fs = require('fs');
 
 var liveRoutes = require('./routes/Live');
 
@@ -23,9 +21,6 @@ app.all('*',function (req, res, next) {
     }
 });
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
 app.use(bodyParser.json({limit: '1mb'}));  //body-parser 解析json格式数据
 app.use(bodyParser.urlencoded({            //此项必须在 bodyParser.json 下面,为参数编码
     extended: true
@@ -34,7 +29,6 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(flash());
 
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
@@ -50,8 +44,6 @@ var jwtCheck = jwt({
     issuer: "https://mokulive.auth0.com/",
     algorithms: ['RS256']
 });
-
-app.use(jwtCheck);
 
 app.get('/authorized', function (req, res) {
     res.send('Secured Resource');
@@ -80,7 +72,7 @@ app.use(function (req, res, next) {
 });
 
 
-app.use('/live', jwtCheck, liveRoutes);
+app.use('/live',jwtCheck, liveRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

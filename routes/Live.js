@@ -6,6 +6,10 @@ var liveBusiness = require('../business/LiveBusiness');
 var constants = require('../services/constants');
 
 
+router.get('/test', function (req, res, next) {
+    res.json({'result':'success'});
+});
+
 router.post('/openRoom', function (req, res, next) {
     let params = {};
     let roomName = req.body.roomName;

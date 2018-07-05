@@ -12,7 +12,7 @@ var redisConnection = require('../conf/RedisConnection')
 
 module.exports = {
 
-    openRoom: function (params, checkJwt, callback) {
+    openRoom: function (params, callback) {
         redisConnection.getClient((client,err)=>{
             if(err){
                 console.error('get redis connection error');
@@ -34,7 +34,7 @@ module.exports = {
         })
     },
 
-    getRoom: function (userName, checkJwt, callback) {
+    getRoom: function (userName, callback) {
         redisConnection.getClient((client,err)=>{
             if(err){
                 console.error('get redis connection error');
