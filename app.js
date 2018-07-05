@@ -50,7 +50,7 @@ var jwtCheck = jwt({
         jwksRequestsPerMinute: 5,
         jwksUri: "https://mokulive.auth0.com/.well-known/jwks.json"
     }),
-    audience: 'http://64.137.224.204:5000/',
+    audience: 'http://64.137.224.204:3000/',
     issuer: "https://mokulive.auth0.com/",
     algorithms: ['RS256']
 });
