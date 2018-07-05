@@ -23,10 +23,6 @@ app.all('*',function (req, res, next) {
     }
 });
 
-app.get('/authorized', function (req, res) {
-    res.send('Secured Resource');
-});
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
@@ -56,6 +52,10 @@ const jwtCheck = jwt({
 });
 
 app.use(jwtCheck);
+
+app.get('/authorized', function (req, res) {
+    res.send('Secured Resource');
+});
 
 app.use(function (req, res, next) {
 
