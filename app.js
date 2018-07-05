@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 
-const jwtCheck = jwt({
+var jwtCheck = jwt({
     secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
@@ -80,7 +80,7 @@ app.use(function (req, res, next) {
 });
 
 
-app.use('/live', liveRoutes);
+app.use('/live', jwtCheck, liveRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

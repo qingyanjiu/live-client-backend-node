@@ -6,7 +6,7 @@ var liveBusiness = require('../business/LiveBusiness');
 var constants = require('../services/constants');
 
 
-router.post('/openRoom',jwtCheck, function (req, res, next) {
+router.post('/openRoom', function (req, res, next) {
     let params = {};
     let roomName = req.body.roomName;
     let userName = req.body.userName;
@@ -25,7 +25,7 @@ router.post('/openRoom',jwtCheck, function (req, res, next) {
 
 
 
-router.get('/getRoom',jwtCheck, function (req, res, next) {
+router.get('/getRoom', function (req, res, next) {
     let userName = req.query.userName;
     liveBusiness.getRoom(userName, result=>{
         if(result === 'error'){
