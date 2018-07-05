@@ -14,7 +14,7 @@ app.all('*',function (req, res, next) {
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
 
     if (req.method == 'OPTIONS') {
-        res.send(200);
+        res.sendStatus(200);
     }
     else {
         next();
@@ -40,12 +40,12 @@ var jwtCheck = jwt({
         jwksRequestsPerMinute: 5,
         jwksUri: "https://mokulive.auth0.com/.well-known/jwks.json"
     }),
-    audience: 'http://64.137.224.204:3000/',
+    audience: 'http://client-backend.mokulive.stream',
     issuer: "https://mokulive.auth0.com/",
     algorithms: ['RS256']
 });
 
-app.get('/authorized', function (req, res) {
+app.get('/authorized',jwtCheck, function (req, res) {
     res.send('Secured Resource');
 });
 
