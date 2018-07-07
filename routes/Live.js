@@ -22,7 +22,7 @@ router.post('/openRoom', function (req, res, next) {
         if(result === 'error'){
             res.json({'result':'error','message':'Create room failed'});
         }else{
-            res.json({'result':'success'});
+            res.json({'result':result});
         }
     });
 });

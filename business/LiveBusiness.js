@@ -21,13 +21,14 @@ module.exports = {
             else {
                 let streamCode = guid.create();
                 params.streamCode = streamCode;
+                params.pushHost = constants.LIVE_PUSH_HOST;
                 client.set(params.userName, JSON.stringify(params), err => {
                     if (err) {
                         console.error('set room info error');
                         callback('error');
                     } else {
                         client.expire(params.userName, constants.REDIS_EXPIRE);
-                        callback('success');
+                        callback(params);
                     }
                 });
             }
@@ -46,7 +47,7 @@ module.exports = {
                         console.error('get room info error');
                         callback('error');
                     } else {
-                        callback(result);
+                        callback(JSON.parse(result));
                     }
                 });
             }

@@ -7,6 +7,8 @@ var constants = {
     REDIS_USERNAME: '',
     REDIS_PASSWORD: '',
     REDIS_EXPIRE: 86400,
+
+    LIVE_PUSH_HOST: 'rtmp://push.mokulive.stream/live'
 };
 
 module.exports = constants;
