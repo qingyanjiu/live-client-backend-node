@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata: 
+  name: backend-node
+  labels:
+    app: backend-node
+spec:
+  selector:
+    matchLabels:
+      app: backend-node
+  replicas: 1
+  template:
+    metadata:
+      name: backend-node
+      labels:
+        app: backend-node
+    spec:
+      containers:
+      - name: backend-node
+        image: alaien/mokulive-client-backend-node
+        ports:
+        - containerPort: 3000
+        
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-node
+  labels:
+    app: backend-node
+spec:
+  selector:
+    app: backend-node
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 3000
+  
